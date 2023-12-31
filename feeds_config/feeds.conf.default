@@ -6,3 +6,4 @@ src-git lede_luci https://github.com/coolsnowwolf/luci.git
 src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main
 src-git passwall https://github.com/xiaorouji/openwrt-passwall
 src-git OpenClash https://github.com/vernesong/OpenClash;master
+src-git istore https://github.com/linkease/istore;main
