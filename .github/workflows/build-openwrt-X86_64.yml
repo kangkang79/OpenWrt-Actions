@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt for rax3000m
+name: Build OpenWrt for X86_64
 
 on:
   repository_dispatch:
@@ -22,8 +22,8 @@ on:
 env:
   REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x #https://github.com/coolsnowwolf/lede
   REPO_BRANCH: openwrt-21.02
-  FEEDS_CONF: feeds_config/feeds.conf.default
-  CONFIG_FILE: config_files/rax3000m.config
+  FEEDS_CONF: feeds_config/feeds.conf.default-X86_64
+  CONFIG_FILE: config_files/x86_64.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
