@@ -22,7 +22,6 @@ on:
 env:
   REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x #https://github.com/coolsnowwolf/lede
   REPO_BRANCH: openwrt-21.02
-  FEEDS_CONF:
   CONFIG_FILE: config_files/rax3000m.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
