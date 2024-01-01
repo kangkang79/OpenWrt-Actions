@@ -14,9 +14,30 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
+if [[ $FEEDS_CONF = *"RAX3000M"* ]]; then
+   echo "RAX3000M feeds configuration"
+   #Get easymesh from lede_luci
+   echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
+elif [[ $FEEDS_CONF = *"X86_64"* ]]; then
+   echo "X86_64 feeds configuration"
+else
+   echo "Use default feeds"
+fi
+
+
+echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
+echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
+echo 'src-git speedtest https://github.com/sirpdboy/netspeedtest.git' >>feeds.conf.default
+
+#echo 'src-git lede_pakcages https://github.com/coolsnowwolf/packages.git' >>feeds.conf.default
+#echo 'src-git easymesh https://github.com/ntlf9t/luci-app-easymesh.git'>>feeds.conf.default
+#echo 'src-git batman_adv https://github.com/onemarcfifty/luci-proto-batman-adv.git' >>feeds.conf.default
+
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git>>feeds.conf.default
 #echo 'src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main'>>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 #echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
+
+cat feeds.conf.default
 
