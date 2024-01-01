@@ -14,11 +14,11 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-if [[ $FEEDS_CONF = *"RAX3000M"* ]]; then
+if [[ $CONFIG_FILE = *"rax3000m"* ]]; then
    echo "RAX3000M feeds configuration"
    #Get easymesh from lede_luci
    echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
-elif [[ $FEEDS_CONF = *"X86_64"* ]]; then
+elif [[ $FEEDS_CONF = *"x86_64"* ]]; then
    echo "X86_64 feeds configuration"
 else
    echo "Use default feeds"
