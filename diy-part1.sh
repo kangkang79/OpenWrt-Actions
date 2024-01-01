@@ -18,7 +18,7 @@ if [[ $CONFIG_FILE = *"rax3000m"* ]]; then
    echo "RAX3000M feeds configuration"
    #Get easymesh from lede_luci
    echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
-elif [[ $FEEDS_CONF = *"x86_64"* ]]; then
+elif [[ $CONFIG_FILE = *"x86_64"* ]]; then
    echo "X86_64 feeds configuration"
 else
    echo "Use default feeds"
