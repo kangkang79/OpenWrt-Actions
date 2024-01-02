@@ -80,9 +80,9 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files openwrt/files
+        [ -e files ] && cp -rf files openwrt/files
         [ -e $CONFIG_FILE ] && echo "Found configuration file: $CONFIG_FILE"
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -e $CONFIG_FILE ] && cp -rf $CONFIG_FILE openwrt/.config
         ls -l openwrt/.config
         cat openwrt/.config |grep luci-app-ddns-go
         [ -e $DIY_P2_SH ] && echo "Found DIY script: $DIY_P2_SH"
