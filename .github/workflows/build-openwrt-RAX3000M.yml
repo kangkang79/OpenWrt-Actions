@@ -24,6 +24,7 @@ env:
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config_files/rax3000m.config
+  DEFCONFIG_FILE: defconfig_files/rax3000m.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -87,6 +88,24 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        
+    - name: Make defconfig custom configuration
+      run: |
+        cd openwrt
+        make defconfig
+        cd ..
+        cp -f openwrt/.config $DEFCONFIG_FILE
+
+
+    - name: Git auto update config
+      uses: stefanzweifel/git-auto-commit-action@v5.0.0
+      id: commit
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        commit_message: auto update config
+        branch: main
+        commit_author: kangkang79 <jeremy_kang@163.com>
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
