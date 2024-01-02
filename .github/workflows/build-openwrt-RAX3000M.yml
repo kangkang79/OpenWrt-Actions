@@ -37,6 +37,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    name: build-openwrt-rax3000m
 
     steps:
     - name: Checkout
