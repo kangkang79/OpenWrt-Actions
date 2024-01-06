@@ -18,13 +18,23 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
+      wifi-config:
+        description: 'Wifi configuration'
+        required: false
+        default: 'luci-app-mtk'
+        type: choice
+        options:
+          - luci-app-mtk
+          - luci-app-mtwifi-cfg
 
 env:
   REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x #https://github.com/coolsnowwolf/lede
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config_files/rax3000m.config
-  DEFCONFIG_FILE: defconfig_files/rax3000m.config
+  CONFIG_FILE_MTWIFI: config_files/rax3000m_mtwifi-cfg.config
+  CONFIG_FILE_MTKSDK: config_files/rax3000m_mtk-sdk.config
+  DEFCONFIG_FILE_MTWIFI: defconfig_files/rax3000m_mtwifi-cfg.config
+  DEFCONFIG_FILE_MTKSDK: defconfig_files/rax3000m_mtk-sdk.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -81,10 +91,11 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && cp -rf files openwrt/files
-        [ -e $CONFIG_FILE ] && echo "Found configuration file: $CONFIG_FILE"
-        [ -e $CONFIG_FILE ] && cp -rf $CONFIG_FILE openwrt/.config
-        ls -l openwrt/.config
-        cat openwrt/.config |grep luci-app-ddns-go
+        if [ ${inputs.wifi-config} == 'luci-app-mtk' ];then
+          [ -e $CONFIG_FILE_MTKSDK ] && cp -rf $CONFIG_FILE_MTKSDK openwrt/.config
+        else
+          [ -e $CONFIG_FILE_MTWIFI ] && cp -rf $CONFIG_FILE_MTWIFI openwrt/.config
+        fi
         [ -e $DIY_P2_SH ] && echo "Found DIY script: $DIY_P2_SH"
         chmod +x $DIY_P2_SH
         cd openwrt
@@ -95,7 +106,12 @@ jobs:
         cd openwrt
         make defconfig
         cd ..
-        cp -f openwrt/.config $DEFCONFIG_FILE
+        if [ ${inputs.wifi-config} == 'luci-app-mtk' ];then
+          cp -f openwrt/.config $DEFCONFIG_FILE_MTKSDK
+        else
+          cp -f openwrt/.config $DEFCONFIG_FILE_MTWIFI
+        fi
+        
 
 
     - name: Git auto update config
