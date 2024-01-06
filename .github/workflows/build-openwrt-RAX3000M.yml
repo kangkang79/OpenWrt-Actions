@@ -212,10 +212,16 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
+        echo "# Build for CMCC RAX3000M"" >> release.txt
+        if [ ${REPO_URL}==*"mt798x"* ];then
+          echo "Source code from mt798x with branch: ${REPO_BRANCH}" >> release.txt
+          echo "[hanwckf/immortalwrt-mt798x (github.com)](https://github.com/hanwckf/immortalwrt-mt798x)" >> release.txt
+        else
+          echo "Source code from immortalwrt with tag: ${REPO_TAG}" >> release.txt
+          echo "[immortalwrt/immortalwrt: An opensource OpenWrt variant for mainland China users. (github.com)](https://github.com/immortalwrt/immortalwrt)" >> release.txt
+        fi
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
-        echo "release info is: "$(cat release.txt)
-        echo "release_tag is "$release_tag
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
