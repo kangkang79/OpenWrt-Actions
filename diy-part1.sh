@@ -14,7 +14,7 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-if [[ $CONFIG_FILE = *"rax3000m"* ]]; then
+if [[ -e CONFIG_FILE_MT798X ]]; then
    echo "RAX3000M feeds configuration"
    if [ ${REPO_URL}==*"mt798x"* ];then
       #Get easymesh from lede_luci for immortal-mt798x
