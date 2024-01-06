@@ -217,8 +217,8 @@ jobs:
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
-        echo "# Build for CMCC RAX3000M"" >> release.txt
-        if [ ${REPO_URL}==*"mt798x"* ];then
+        echo "# Build for CMCC RAX3000M" >> release.txt
+        if [ ${REPO_URL}==*"mt798x"* ]; then
           echo "Source code from mt798x with branch: ${REPO_BRANCH}" >> release.txt
           echo "[hanwckf/immortalwrt-mt798x (github.com)](https://github.com/hanwckf/immortalwrt-mt798x)" >> release.txt
         else
