@@ -14,8 +14,8 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-if [[ $CONFIG_FILE = *"rax3000m"* ]]; then
-   echo "RAX3000M feeds configuration"
+if [[ $CONFIG_FILE = *"mt798x"* ]]; then
+   echo "RAX3000M-mt798x feeds configuration"
    #Get easymesh from lede_luci
    echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
 elif [[ $CONFIG_FILE = *"x86_64"* ]]; then
@@ -26,7 +26,7 @@ fi
 
 echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
 echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
-echo 'src-git speedtest https://github.com/sirpdboy/netspeedtest.git' >>feeds.conf.default
+#echo 'src-git speedtest https://github.com/sirpdboy/netspeedtest.git' >>feeds.conf.default
 
 #echo 'src-git lede_pakcages https://github.com/coolsnowwolf/packages.git' >>feeds.conf.default
 #echo 'src-git easymesh https://github.com/ntlf9t/luci-app-easymesh.git'>>feeds.conf.default

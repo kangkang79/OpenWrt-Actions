@@ -18,23 +18,24 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-      wifi-config:
-        description: 'Wifi configuration'
-        required: false
-        default: 'luci-app-mtk'
+      repo_url:
+        description: 'immortalwrt source code URL'
+        required: true
+        default: 'https://github.com/hanwckf/immortalwrt-mt798x'
         type: choice
         options:
-          - luci-app-mtk
-          - luci-app-mtwifi-cfg
+          - https://github.com/hanwckf/immortalwrt-mt798x
+          - https://github.com/immortalwrt/immortalwrt
 
 env:
-  REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x #https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: openwrt-21.02
+  REPO_URL: ${{ inputs.repo_url }}
+  REPO_BRANCH: openwrt-21.02    ##immortalwrt-mt798x use repo_branch to download source code
+  REPO_TAG: v23.05.1     #immortalwrt use repo_tag to download source code
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE_MTWIFI: config_files/rax3000m_mtwifi-cfg.config
-  CONFIG_FILE_MTKSDK: config_files/rax3000m_mtk-sdk.config
-  DEFCONFIG_FILE_MTWIFI: defconfig_files/rax3000m_mtwifi-cfg.config
-  DEFCONFIG_FILE_MTKSDK: defconfig_files/rax3000m_mtk-sdk.config
+  CONFIG_FILE_MT798X: config_files/rax3000m_immortalwrt-mt798x.config
+  CONFIG_FILE_IMMORTALWRT: config_files/rax3000m_immortalwrt.config
+  DEFCONFIG_FILE_MT798X: defconfig_files/rax3000m_immortalwrt-mt798x.config
+  DEFCONFIG_FILE_IMMORTALWRT: defconfig_files/rax3000m_immortalwrt.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -70,7 +71,13 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        if [ ${REPO_URL}==*"mt798x"* ];then
+          echo "Clone mt798x ${REPO_URL}"
+          git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
+        else
+          echo "Clone immortalwrt ${REPO_URL}" 
+          git clone $REPO_URL -b REPO_TAG --depth 1 openwrt
+        fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
 
@@ -91,10 +98,12 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && cp -rf files openwrt/files
-        if [ ${inputs.wifi-config} == 'luci-app-mtk' ];then
-          [ -e $CONFIG_FILE_MTKSDK ] && cp -rf $CONFIG_FILE_MTKSDK openwrt/.config
+        if [ ${REPO_URL}==*"mt798x"* ];then
+          echo "Load mt798x configuration"
+          [ -e $CONFIG_FILE_MT798X ] && cp -rf $CONFIG_FILE_MT798X openwrt/.config
         else
-          [ -e $CONFIG_FILE_MTWIFI ] && cp -rf $CONFIG_FILE_MTWIFI openwrt/.config
+          echo "Load immortalwrt configuration"
+          [ -e $CONFIG_FILE_IMMORTALWRT ] && cp -rf $CONFIG_FILE_IMMORTALWRT openwrt/.config
         fi
         [ -e $DIY_P2_SH ] && echo "Found DIY script: $DIY_P2_SH"
         chmod +x $DIY_P2_SH
@@ -106,10 +115,10 @@ jobs:
         cd openwrt
         make defconfig
         cd ..
-        if [ ${inputs.wifi-config} == 'luci-app-mtk' ];then
-          cp -f openwrt/.config $DEFCONFIG_FILE_MTKSDK
+        if [ ${REPO_URL}==*"mt798x"* ];then
+          cp -f openwrt/.config $DEFCONFIG_FILE_MT798X
         else
-          cp -f openwrt/.config $DEFCONFIG_FILE_MTWIFI
+          cp -f openwrt/.config $DEFCONFIG_FILE_IMMORTALWRT
         fi
         
 
