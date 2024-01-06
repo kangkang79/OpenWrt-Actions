@@ -18,7 +18,7 @@ if [[ $CONFIG_FILE = *"x86_64"* ]]; then
    echo "X86_64 feeds configuration"
 else
    echo "RAX3000M feeds configuration"
-   if [ ${REPO_URL}==*"mt798x"* ];then
+   if [ ${REPO_URL} == *"mt798x"* ]; then
       #Get easymesh from lede_luci for immortal-mt798x
       echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
    else
