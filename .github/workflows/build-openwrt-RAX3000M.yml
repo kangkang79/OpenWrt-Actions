@@ -80,7 +80,7 @@ jobs:
           git clone $REPO_URL -b REPO_TAG --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        LATEST_COMMIT = $(git -C ./openwrt log -1)
+        LATEST_COMMIT=$(git -C ./openwrt log -1)
         echo "${LATEST_COMMIT}"
         echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
 
