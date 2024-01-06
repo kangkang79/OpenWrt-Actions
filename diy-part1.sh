@@ -14,16 +14,16 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-if [[ -e $CONFIG_FILE_MT798X ]]; then
+if [[ $CONFIG_FILE = *"x86_64"* ]]; then
+   echo "X86_64 feeds configuration"
+else
    echo "RAX3000M feeds configuration"
    if [ ${REPO_URL}==*"mt798x"* ];then
       #Get easymesh from lede_luci for immortal-mt798x
       echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
+   else
+      echo "Use default feeds"
    fi
-elif [[ $CONFIG_FILE = *"x86_64"* ]]; then
-   echo "X86_64 feeds configuration"
-else
-   echo "Use default feeds"
 fi
 
 echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
