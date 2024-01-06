@@ -118,9 +118,11 @@ jobs:
         cd openwrt
         make defconfig
         cd ..
-        if [ ${REPO_URL}==*"mt798x"* ];then
+        if [ ${REPO_URL}==*"mt798x"* ]; then
+          echo "defconfig mt798x configuration"
           cp -f openwrt/.config $DEFCONFIG_FILE_MT798X
         else
+          echo "defconfig immortalwrt configuration"
           cp -f openwrt/.config $DEFCONFIG_FILE_IMMORTALWRT
         fi
         
