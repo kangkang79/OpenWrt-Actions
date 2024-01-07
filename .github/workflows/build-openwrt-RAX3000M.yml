@@ -79,10 +79,10 @@ jobs:
           git clone $REPO_URL -b REPO_TAG --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        latest_commit=$(git -C ./openwrt log -1)
-        echo "${latest_commit}"
-        echo "LATEST_COMMIT=${latest_commit}" >> $GITHUB_ENV
-        echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
+        #latest_commit=$(git -C ./openwrt log -1)
+        #echo "${latest_commit}"
+        #echo "LATEST_COMMIT=${latest_commit}" >> $GITHUB_ENV
+        #echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
 
     - name: Load custom feeds
       run: |
