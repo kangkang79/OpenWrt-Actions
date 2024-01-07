@@ -31,7 +31,6 @@ env:
   REPO_URL: ${{ inputs.repo_url }}
   REPO_BRANCH: openwrt-21.02    ##immortalwrt-mt798x use repo_branch to download source code
   REPO_TAG: v23.05.1     #immortalwrt use repo_tag to download source code
-  LATEST_COMMIT: 'latest'
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE_MT798X: config_files/rax3000m_immortalwrt-mt798x.config
   CONFIG_FILE_IMMORTALWRT: config_files/rax3000m_immortalwrt.config
@@ -80,7 +79,7 @@ jobs:
           git clone $REPO_URL -b REPO_TAG --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        env.LATEST_COMMIT=$(git -C ./openwrt log -1)
+        echo "LATEST_COMMIT=$(git -C ./openwrt log -1)" >> $GITHUB_ENV
         echo "${{ env.LATEST_COMMIT }}"
         echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
 
