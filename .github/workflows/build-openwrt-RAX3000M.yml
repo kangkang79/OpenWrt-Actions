@@ -71,7 +71,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        if [ ${{ env.REPO_URL }}==*"mt798x"* ];then
+        if [ ${{ env.REPO_URL }}==*"mt798x"* ]; then
           echo "Clone mt798x ${REPO_URL}"
           git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
         else
@@ -101,7 +101,7 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && cp -rf files openwrt/files
-        if [ ${REPO_URL}==*"mt798x"* ];then
+        if [ ${REPO_URL}==*"mt798x"* ]; then
           echo "Load mt798x configuration"
           [ -e $CONFIG_FILE_MT798X ] && cp -rf $CONFIG_FILE_MT798X openwrt/.config
         else
