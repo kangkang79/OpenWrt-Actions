@@ -76,7 +76,7 @@ jobs:
           git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
         else
           echo "Clone immortalwrt ${REPO_URL}" 
-          git clone $REPO_URL -b REPO_TAG --depth 1 openwrt
+          git clone $REPO_URL -b $REPO_TAG --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         latest_commit=$(git -C ./openwrt log -1)
