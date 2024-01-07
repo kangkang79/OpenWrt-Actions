@@ -71,7 +71,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        if [ ${REPO_URL}==*"mt798x"* ];then
+        if [ ${{ env.REPO_URL }}==*"mt798x"* ];then
           echo "Clone mt798x ${REPO_URL}"
           git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
         else
