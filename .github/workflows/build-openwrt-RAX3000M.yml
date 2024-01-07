@@ -225,7 +225,7 @@ jobs:
           echo "Source code from immortalwrt with tag: ${REPO_TAG}" >> release.txt
           echo "[immortalwrt/immortalwrt: An opensource OpenWrt variant for mainland China users. (github.com)](https://github.com/immortalwrt/immortalwrt)" >> release.txt
         fi
-        echo "${{ env.LATEST_COMMIT }}" >> release.txt
+        #echo "${{ env.LATEST_COMMIT }}" >> release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
