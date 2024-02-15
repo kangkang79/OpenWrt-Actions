@@ -71,7 +71,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        if [ ${REPO_URL} = *"mt798x"* ]; then
+        if [ ${REPO_URL}=*"mt798x"* ]; then
           echo "Clone mt798x ${REPO_URL}"
           git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
         else
@@ -101,7 +101,7 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && cp -rf files openwrt/files
-        if [ ${REPO_URL} = *"mt798x"* ]; then
+        if [ ${REPO_URL}=*"mt798x"* ]; then
           echo "Load mt798x configuration"
           [ -e $CONFIG_FILE_MT798X ] && cp -rf $CONFIG_FILE_MT798X openwrt/.config
         else
@@ -118,7 +118,7 @@ jobs:
         cd openwrt
         make defconfig
         cd ..
-        if [ ${REPO_URL} = *"mt798x"* ]; then
+        if [ ${REPO_URL}=*"mt798x"* ]; then
           echo "defconfig mt798x configuration"
           cp -f openwrt/.config $DEFCONFIG_FILE_MT798X
         else
@@ -218,7 +218,7 @@ jobs:
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         echo "# Build for CMCC RAX3000M" >> release.txt
-        if [ ${REPO_URL} = *"mt798x"* ]; then
+        if [ ${REPO_URL}=*"mt798x"* ]; then
           echo "Source code from mt798x with branch: ${REPO_BRANCH}" >> release.txt
           echo "[hanwckf/immortalwrt-mt798x (github.com)](https://github.com/hanwckf/immortalwrt-mt798x)" >> release.txt
         else
