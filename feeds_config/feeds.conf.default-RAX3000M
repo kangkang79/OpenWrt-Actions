@@ -6,6 +6,6 @@ src-git lede_luci https://github.com/coolsnowwolf/luci.git
 #src-git lede_pakcages https://github.com/coolsnowwolf/packages.git
 #src-git easymesh https://github.com/ntlf9t/luci-app-easymesh.git
 #src-git batman_adv https://github.com/onemarcfifty/luci-proto-batman-adv.git
-src-git OpenClash https://github.com/vernesong/OpenClash;master
-src-git istore https://github.com/linkease/istore;main
-src-git speedtest https://github.com/sirpdboy/netspeedtest.git
+#src-git OpenClash https://github.com/vernesong/OpenClash;master
+#src-git istore https://github.com/linkease/istore;main
+#src-git speedtest https://github.com/sirpdboy/netspeedtest.git
