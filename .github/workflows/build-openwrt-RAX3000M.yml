@@ -58,7 +58,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc 
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
         sudo -E apt-get -qq autoremove --purge
@@ -76,7 +76,7 @@ jobs:
           git clone $REPO_URL -b $REPO_BRANCH_MT798X --depth 1 openwrt
         else
           echo "Clone immortalwrt ${REPO_URL}" 
-          git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
+          git clone $REPO_URL -b $REPO_BRANCH --single-branch --filter=blob:none --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         latest_commit=$(git -C ./openwrt log -1)
