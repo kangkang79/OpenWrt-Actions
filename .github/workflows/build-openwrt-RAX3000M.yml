@@ -29,8 +29,8 @@ on:
 
 env:
   REPO_URL: ${{ inputs.repo_url }}
-  REPO_BRANCH: openwrt-21.02    ##immortalwrt-mt798x use repo_branch to download source code
-  REPO_TAG: v23.05.1     #immortalwrt use repo_tag to download source code
+  REPO_BRANCH_MT798X: openwrt-21.02    ##immortalwrt-mt798x use repo_branch to download source code
+  REPO_BRANCH: openwrt-23.05     #immortalwrt use repo_tag to download source code
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE_MT798X: config_files/rax3000m_immortalwrt-mt798x.config
   CONFIG_FILE_IMMORTALWRT: config_files/rax3000m_immortalwrt.config
@@ -73,10 +73,10 @@ jobs:
         df -hT $PWD
         if [[ ${REPO_URL} =~ "mt798x" ]]; then
           echo "Clone mt798x ${REPO_URL}"
-          git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
+          git clone $REPO_URL -b $REPO_BRANCH_MT798X --depth 1 openwrt
         else
           echo "Clone immortalwrt ${REPO_URL}" 
-          git clone $REPO_URL -b $REPO_TAG --depth 1 openwrt
+          git clone $REPO_URL -b $REPO_BRANCH --depth 1 openwrt
         fi
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         latest_commit=$(git -C ./openwrt log -1)
