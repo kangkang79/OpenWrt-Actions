@@ -20,14 +20,14 @@ else
    echo "RAX3000M feeds configuration"
    if [[ ${REPO_URL} = *"mt798x"* ]]; then
       echo "Get easymesh from lede_luci for immortal-mt798x"
-      echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
+      #echo 'src-git lede_luci https://github.com/coolsnowwolf/luci.git' >>feeds.conf.default
    else
       echo "Use default feeds"
    fi
 fi
 
 #echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
-echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
+#echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
 #echo 'src-git speedtest https://github.com/sirpdboy/netspeedtest.git' >>feeds.conf.default
 
 #echo 'src-git lede_pakcages https://github.com/coolsnowwolf/packages.git' >>feeds.conf.default
