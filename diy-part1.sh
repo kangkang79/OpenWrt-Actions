@@ -26,7 +26,7 @@ else
    fi
 fi
 
-echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
+#echo 'src-git OpenClash https://github.com/vernesong/OpenClash;master' >>feeds.conf.default
 echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
 #echo 'src-git speedtest https://github.com/sirpdboy/netspeedtest.git' >>feeds.conf.default
 
