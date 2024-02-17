@@ -94,7 +94,7 @@ jobs:
         latest_commit=$(git -C ./openwrt log -1)
         echo "${latest_commit}"
         #echo "LATEST_COMMIT=${latest_commit}" >> $GITHUB_ENV
-        #echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
+        echo "GITHUB_WORKSPACE is "$GITHUB_WORKSPACE
 
     - name: Load custom feeds
       run: |
